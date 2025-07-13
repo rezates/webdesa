@@ -1,125 +1,152 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informasi Desa</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Informasi Desa - Kendalkemlagi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #1a2c1c;
-      color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
     }
 
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(90deg, #1a2c1c, #657467);
+      background: #fff;
       padding: 15px 30px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
       z-index: 1000;
-      flex-wrap: wrap;
     }
 
-    .navbar-left .logo {
-      font-size: 1.2rem;
+    .logo {
+      text-decoration: none;
+      color: #0077cc;
       font-weight: 600;
-      color: #fff;
-      text-decoration: none;
+      font-size: 1.3rem;
     }
 
-    .navbar a {
-      color: #fff;
-      margin-left: 20px;
+    .burger {
+      display: none;
+      font-size: 26px;
+      color: #0077cc;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .menu li a {
       text-decoration: none;
+      color: #333;
       font-weight: 500;
       position: relative;
       padding: 5px 0;
-      transition: all 0.3s ease;
     }
 
-    .navbar a::after {
+    .menu li a:hover {
+      color: #0077cc;
+    }
+
+    .menu li a::after {
       content: '';
       position: absolute;
       left: 0;
       bottom: -4px;
       width: 0%;
       height: 2px;
-      background: #FFD700;
+      background: #0077cc;
       transition: 0.3s;
     }
 
-    .navbar a:hover::after {
+    .menu li a:hover::after {
       width: 100%;
     }
 
-    .navbar a:hover {
-      color: #FFD700;
+    .hero {
+      background: linear-gradient(to right, #0077cc, #00b894);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 20px;
-      }
-
-      .navbar a {
-        margin: 6px 0;
-      }
-    }
-
-    /* Container Konten */
-    .informasi-container {
-      max-width: 900px;
-      margin: 40px auto;
-      background-color: #213529;
-      border-radius: 14px;
-      padding: 30px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .informasi-container h1 {
+    .hero h1 {
       font-size: 2.5rem;
-      color: #FFD700;
-      margin-bottom: 20px;
-    }
-
-    .informasi-container ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      font-size: 1.1rem;
-    }
-
-    .informasi-container ul li {
       margin-bottom: 10px;
     }
 
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .content {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      margin-bottom: 5px;
+      color: #0077cc;
+    }
+
+    .card small {
+      color: #777;
+    }
+
+    .card p {
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
-      .informasi-container {
-        margin: 20px;
+      .menu {
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        top: 70px;
+        right: 30px;
+        background: white;
         padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       }
 
-      .informasi-container h1 {
+      .menu.active {
+        display: flex;
+      }
+
+      .burger {
+        display: block;
+      }
+
+      .hero h1 {
         font-size: 1.8rem;
       }
 
-      .informasi-container ul {
+      .hero p {
         font-size: 1rem;
       }
     }
@@ -127,29 +154,57 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav class="navbar">
-    <div class="navbar-left">
-      <a href="index.html" class="logo">Home</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="profil.html">Profil</a>
-      <a href="informasi.html">Informasi</a>
-      <a href="layanan.html">Layanan</a>
-      <a href="demografi.html">Demografi</a>
-      <a href="galeri.html">Galeri</a>
-    </div>
+    <a href="index.html" class="logo">Desa Kendalkemlagi</a>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+    <ul class="menu">
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="informasi.html" style="color:#0077cc;">Informasi</a></li>
+      <li><a href="layanan.html">Layanan</a></li>
+      <li><a href="demografi.html">Demografi</a></li>
+      <li><a href="galeri.html">Galeri</a></li>
+    </ul>
   </nav>
 
-  <!-- Konten Informasi -->
-  <section class="informasi-container">
-    <h1>Informasi Terbaru</h1>
-    <ul>
-      <li>Rapat Desa akan diadakan pada tanggal 17 Juli.</li>
-      <li>Pelayanan e-KTP buka setiap Senin &amp; Kamis.</li>
-      <li>Pengumuman lomba desa bersih 2025.</li>
-    </ul>
+  <section class="hero">
+    <h1>Informasi Desa</h1>
+    <p>Kumpulan informasi terkini untuk masyarakat</p>
   </section>
+
+  <section class="content">
+    <div class="card">
+      <h3>Pemberitahuan Vaksinasi Warga</h3>
+      <small>10 Juli 2025</small>
+      <p>
+        Pemerintah Desa Kendalkemlagi bekerja sama dengan Puskesmas setempat mengadakan vaksinasi massal 
+        untuk seluruh warga pada tanggal 15 Juli 2025. Mohon membawa KTP dan KK saat hadir.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Jadwal Pengambilan BLT-DD Tahap 2</h3>
+      <small>1 Juli 2025</small>
+      <p>
+        Penyaluran BLT Dana Desa tahap 2 akan dilakukan di Balai Desa mulai pukul 08.00 WIB. Pastikan nama Anda 
+        terdaftar dan hadir tepat waktu sesuai jadwal yang telah diumumkan.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Pendaftaran Bantuan Pupuk Bersubsidi</h3>
+      <small>25 Juni 2025</small>
+      <p>
+        Bagi petani yang belum mendaftar program subsidi pupuk, dapat segera mendatangi Kantor Desa
+        dengan membawa fotokopi KTP dan SPPT lahan.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.menu').classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
