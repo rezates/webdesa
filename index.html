@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistem Informasi Desa Luthu Lamweu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .navbar-left .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    .burger {
+      display: none;
+      font-size: 26px;
+      color: #0077cc;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+      margin: 0;
+    }
+
+    .menu li a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #0077cc;
+      transition: 0.3s;
+    }
+
+    .menu li a:hover::after {
+      width: 100%;
+    }
+
+    .menu li a:hover {
+      color: #0077cc;
+    }
+
+    @media (max-width: 768px) {
+      .burger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      .menu.active {
+        display: flex;
+      }
+    }
+
+    /* Header (pakai gambar) */
+    .header {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .header-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 68, 119, 0.4);
+    }
+
+    .header-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .header-content h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .header-content p {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .header-content p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 25px;
+      padding: 40px 30px;
+      background-color: #ffffff;
+    }
+
+    .menu-item {
+      background: #f4f6f8;
+      border-radius: 12px;
+      padding: 20px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .menu-item:hover {
+      background-color: #e8f1ff;
+      transform: translateY(-5px);
+    }
+
+    .menu-icon img {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 10px;
+    }
+
+    .menu-item p {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #333;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 20px;
+        gap: 12px;
+      }
+
+      .menu-item {
+        padding: 12px 8px;
+      }
+
+      .menu-icon img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .menu-item p {
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Profil Desa */
+    .profil-desa {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    .profil-desa img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+
+    .profil-desa .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .profil-desa .overlay h2 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #00b894;
+    }
+
+    .profil-desa .overlay p {
+      font-size: 1.05rem;
+      max-width: 800px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .profil-desa {
+        height: 400px;
+      }
+
+      .profil-desa .overlay h2 {
+        font-size: 1.6rem;
+      }
+
+      .profil-desa .overlay p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Peta Desa */
+    .peta-desa {
+      padding: 40px 20px;
+    }
+
+    .peta-desa iframe {
+      width: 100%;
+      height: 400px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="#" class="logo">Desa Luthu Lamweu</a>
+    </div>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+    <ul class="menu">
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="informasi.html">Informasi</a></li>
+      <li><a href="layanan.html">Layanan</a></li>
+      <li><a href="demografi.html">Demografi</a></li>
+      <li><a href="galeri.html">Galeri</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header (gambar) -->
+  <header class="header">
+    <img src="images/desa.jpg" alt="Desa Luthu Lamweu" class="header-image">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <h1>Selamat Datang di Desa Kami</h1>
+      <p>Potret alam dan budaya yang asri.</p>
+    </div>
+  </header>
+
+  <!-- Menu Grid -->
+  <section class="menu-grid">
+    <a href="peta.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/map.png"/></div>
+      <p>Peta Desa</p>
+    </a>
+    <a href="informasi-publik.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/info.png"/></div>
+      <p>Informasi Publik</p>
+    </a>
+    <a href="arsip-berita.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/archive.png"/></div>
+      <p>Arsip Berita</p>
+    </a>
+    <a href="album-galeri.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/picture.png"/></div>
+      <p>Album Galeri</p>
+    </a>
+    <a href="pengaduan.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/megaphone.png"/></div>
+      <p>Pengaduan</p>
+    </a>
+    <a href="pembangunan.html" class="menu-item">
+      <div class="menu-icon"><img src="/images/pembangunan.png" alt="Pembangunan"></div>
+      <p>Pembangunan</p>
+    </a>
+    <a href="status-idm.html" class="menu-item">
+      <div class="menu-icon"><img src="https://img.icons8.com/color/96/000000/combo-chart.png"/></div>
+      <p>Status IDM</p>
+    </a>
+  </section>
+
+  <!-- Profil Desa -->
+  <section class="profil-desa">
+    <img src="images/fotodesa.jpg" alt="Desa Luthu Lamweu">
+    <div class="overlay">
+      <h2>Profil Desa Luthu Lamweu</h2>
+      <p>
+        Desa Luthu Lamweu yang terletak di Kabupaten Aceh Besar memiliki kekayaan sumber daya alam, 
+        seperti air terjun dan produk lokal (tepung janeng, asam sunti, serta kerajinan dari daun kelapa). 
+        Desa ini memiliki potensi besar untuk dikembangkan sebagai destinasi wisata, 
+        meskipun saat ini akses dan sarana pendukung masih terbatas.
+      </p>
+    </div>
+  </section>
+
+  <!-- Peta -->
+  <section id="peta" class="peta-desa">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48988.28985327394!2d95.32699684368372!3d5.4133910587493785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30403f0a1895ec09%3A0xb99dad4326164601!2sLuthu%20Lamweu%2C%20Kec.%20SukaMakmur%2C%20Kabupaten%20Aceh%20Besar%2C%20Aceh!5e1!3m2!1sid!2sid!4v1749116949307!5m2!1sid!2sid"
+      allowfullscreen 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.menu').classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>

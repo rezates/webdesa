@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Desa</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a2c1c;
+      color: #f0f0f0;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #1a2c1c, #657467);
+      padding: 15px 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    .navbar-left .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .navbar a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #FFD700;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    .navbar a:hover {
+      color: #FFD700;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+      }
+
+      .navbar a {
+        margin: 6px 0;
+      }
+    }
+
+    /* Container Konten */
+    .informasi-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #213529;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .informasi-container h1 {
+      font-size: 2.5rem;
+      color: #FFD700;
+      margin-bottom: 20px;
+    }
+
+    .informasi-container ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      font-size: 1.1rem;
+    }
+
+    .informasi-container ul li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .informasi-container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .informasi-container h1 {
+        font-size: 1.8rem;
+      }
+
+      .informasi-container ul {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="index.html" class="logo">Home</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="profil.html">Profil</a>
+      <a href="informasi.html">Informasi</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="demografi.html">Demografi</a>
+      <a href="galeri.html">Galeri</a>
+    </div>
+  </nav>
+
+  <!-- Konten Informasi -->
+  <section class="informasi-container">
+    <h1>Informasi Terbaru</h1>
+    <ul>
+      <li>Rapat Desa akan diadakan pada tanggal 17 Juli.</li>
+      <li>Pelayanan e-KTP buka setiap Senin &amp; Kamis.</li>
+      <li>Pengumuman lomba desa bersih 2025.</li>
+    </ul>
+  </section>
+
+</body>
+</html>
